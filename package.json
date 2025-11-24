@@ -10,16 +10,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@azure/msal-react": "^3.0.22",
-    "@azure/msal-browser": "^4.26.2",
-    "@microsoft/microsoft-graph-client": "^3.0.7",
-    "@mui/icons-material": "^5.15.0",
-    "@mui/material": "^5.15.0",
-    "@mui/x-data-grid": "^7.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.22.0"
-  },
+  "@azure/msal-browser": "^4.26.2",
+  "@azure/msal-react": "^3.0.22",
+  "@emotion/cache": "^11.13.1",
+  "@emotion/react": "^11.13.3",
+  "@emotion/styled": "^11.13.0",
+  "@microsoft/microsoft-graph-client": "^3.0.7",
+  "@mui/icons-material": "^5.16.7",
+  "@mui/material": "^5.16.7",
+  "@mui/x-data-grid": "^7.14.0",
+  "prop-types": "^15.8.1",
+  "react": "^18.2.0",
+  "react-dom": "^18.2.0",
+  "react-router-dom": "^6.26.1"
+},
   "devDependencies": {
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
