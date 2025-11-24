@@ -19,13 +19,12 @@ import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import WeldLog from './components/WeldLog';
 import Dashboard from './components/Dashboard';
 
-// ──────────────────────────────────────────────────────────────
-// UPDATE THESE WITH YOUR REAL VALUES (After Azure AD setup)
-// ──────────────────────────────────────────────────────────────
-const SP_SITE_URL = 'https://YOURCOMPANY.sharepoint.com/sites/QC'; // e.g., https://alco.sharepoint.com/sites/QC
-const CLIENT_ID = '00000000-0000-0000-0000-000000000000'; // From Azure AD App Registration
-const TENANT_ID = '00000000-0000-0000-0000-000000000000'; // Or use 'common' for multi-tenant
-// ──────────────────────────────────────────────────────────────
+// YOUR REAL SHAREPOINT SITE — CHANGE THIS TO YOUR ACTUAL ONE
+const SP_SITE_URL = 'https://alco.sharepoint.com/sites/QC'; // ← update if different
+
+// YOUR REAL AZURE AD IDs — ALREADY FILLED IN FROM YOUR SCREENSHOT
+const CLIENT_ID = '03225382-1856-44e6-b492-d2350bab609c';
+const TENANT_ID = 'cb27d626-9691-4932-8a43-c75911cfad16';
 
 const msalConfig: Configuration = {
   auth: {
@@ -34,21 +33,8 @@ const msalConfig: Configuration = {
     redirectUri: window.location.origin,
   },
   cache: {
-    cacheLocation: 'localStorage', // For offline support
-    storeAuthStateInCookie: false, // Better for privacy
-  },
-  system: {
-    loggerOptions: {
-      loggerCallback: (level: any, message: string, containsPii: boolean) => {
-        if (containsPii) return;
-        switch (level) {
-          case 0: console.error(message); break; // Error
-          case 1: console.warn(message); break; // Warning
-          case 2: console.info(message); break; // Info
-          case 3: console.debug(message); break; // Verbose
-        }
-      },
-    },
+    cacheLocation: 'localStorage',
+    storeAuthStateInCookie: false,
   },
 };
 
@@ -61,7 +47,7 @@ function LoginButton() {
   const handleLogin = async () => {
     try {
       await instance.loginPopup({
-        scopes: ['User.Read', 'Sites.ReadWrite.All'], // For SharePoint access
+        scopes: ['User.Read', 'Sites.ReadWrite.All'],
       });
       navigate('/');
     } catch (error) {
@@ -75,7 +61,7 @@ function LoginButton() {
       variant="contained" 
       size="large" 
       onClick={handleLogin}
-      sx={{ minWidth: 200 }} // Glove-friendly size
+      sx={{ minWidth: 240, py: 2, fontSize: '1.2rem' }}
     >
       Sign in with Microsoft 365
     </Button>
@@ -93,12 +79,8 @@ function App() {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Nisku Weld QC Tracker
             </Typography>
-            <Button color="inherit" component={Link} to="/">
-              Dashboard
-            </Button>
-            <Button color="inherit" component={Link} to="/welds">
-              Log Weld
-            </Button>
+            <Button color="inherit" component={Link} to="/">Dashboard</Button>
+            <Button color="inherit" component={Link} to="/welds">Log Weld</Button>
           </Toolbar>
         </AppBar>
 
@@ -106,7 +88,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard siteUrl={siteUrl} />} />
             <Route path="/welds" element={<WeldLog siteUrl={siteUrl} />} />
-            <Route path="*" element={<Typography>Page not found</Typography>} />
           </Routes>
         </Container>
       </AuthenticatedTemplate>
@@ -125,17 +106,14 @@ function App() {
           }}
         >
           <Typography variant="h3" gutterBottom color="primary">
-            Welcome to Nisku Weld QC Tracker
+            Nisku Weld QC Tracker
           </Typography>
-          <Typography variant="h6" sx={{ mb: 2 }}>
-            Fast, mobile QC logging for your fab shop – powered by SharePoint.
-          </Typography>
-          <Typography variant="body1" sx={{ maxWidth: 500, mb: 3 }}>
-            Sign in with your Microsoft 365 account to log welds, track NDE, check welder quals, and generate MDR packages. Works offline too.
+          <Typography variant="h6" sx={{ mb: 3 }}>
+            Fast, mobile, glove-friendly QC for the shop floor
           </Typography>
           <LoginButton />
-          <Alert severity="info" sx={{ mt: 2 }}>
-            <strong>Shop Floor Ready:</strong> Glove-friendly buttons, QR scanning, photo uploads, and auto-sync.
+          <Alert severity="success" sx={{ mt: 3, maxWidth: 600 }}>
+            <strong>Ready for tomorrow:</strong> Real-time weld logging, photo upload, QR scanning, welder expiry alerts, NDE tracking, and one-click MDR packages — all in SharePoint.
           </Alert>
         </Box>
       </UnauthenticatedTemplate>
