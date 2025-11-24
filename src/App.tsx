@@ -19,18 +19,21 @@ import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import WeldLog from './components/WeldLog';
 import Dashboard from './components/Dashboard';
 
-// YOUR REAL SHAREPOINT SITE — CHANGE THIS TO YOUR ACTUAL ONE
-const SP_SITE_URL = 'https://alco.sharepoint.com/sites/QC'; // ← update if different
+// CHANGE ONLY THIS LINE IF YOUR NETLIFY URL EVER CHANGES
+const SP_SITE_URL = 'https://alcoincca.sharepoint.com/sites/ALCOQuality';
 
-// YOUR REAL AZURE AD IDs — ALREADY FILLED IN FROM YOUR SCREENSHOT
+// YOUR REAL AZURE AD IDs
 const CLIENT_ID = '03225382-1856-44e6-b492-d2350bab609c';
 const TENANT_ID = 'cb27d626-9691-4932-8a43-c75911cfad16';
+
+// EXACT REDIRECT URI — NO TRAILING SLASH (this is the magic one)
+const REDIRECT_URI = 'https://6923f14960ae70008ead692-moonlit-buttercream-b81cef.netlify.app';
 
 const msalConfig: Configuration = {
   auth: {
     clientId: CLIENT_ID,
     authority: `https://login.microsoftonline.com/${TENANT_ID}`,
- redirectUri: 'https://6923f14960ae70008ead692-moonlit-buttercream-b81cef.netlify.app',,
+    redirectUri: REDIRECT_URI,
   },
   cache: {
     cacheLocation: 'localStorage',
@@ -61,7 +64,7 @@ function LoginButton() {
       variant="contained" 
       size="large" 
       onClick={handleLogin}
-      sx={{ minWidth: 240, py: 2, fontSize: '1.2rem' }}
+      sx={{ minWidth: 280, py: 2, fontSize: '1.3rem' }}
     >
       Sign in with Microsoft 365
     </Button>
@@ -101,19 +104,19 @@ function App() {
             alignItems: 'center',
             height: '100vh',
             textAlign: 'center',
-            gap: 3,
+            gap: 4,
             p: 2,
           }}
         >
           <Typography variant="h3" gutterBottom color="primary">
             Nisku Weld QC Tracker
           </Typography>
-          <Typography variant="h6" sx={{ mb: 3 }}>
-            Fast, mobile, glove-friendly QC for the shop floor
+          <Typography variant="h6" sx={{ mb: 3, maxWidth: 700 }}>
+            Fast, mobile, glove-friendly weld logging for ALCO’s shop floor
           </Typography>
           <LoginButton />
-          <Alert severity="success" sx={{ mt: 3, maxWidth: 600 }}>
-            <strong>Ready for tomorrow:</strong> Real-time weld logging, photo upload, QR scanning, welder expiry alerts, NDE tracking, and one-click MDR packages — all in SharePoint.
+          <Alert severity="success" sx={{ mt: 2, maxWidth: 700 }}>
+            <strong>Ready for action:</strong> Real-time weld logging, photo upload, QR scanning, welder continuity, NDE tracking, and one-click MDR packages — all in your SharePoint.
           </Alert>
         </Box>
       </UnauthenticatedTemplate>
