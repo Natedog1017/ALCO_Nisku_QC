@@ -30,7 +30,7 @@ const msalConfig: Configuration = {
   auth: {
     clientId: CLIENT_ID,
     authority: `https://login.microsoftonline.com/${TENANT_ID}`,
-    redirectUri: window.location.origin,
+    redirectUri: 'https://6923f14960ae70008ead692-moonlit-buttercream-b81cef.netlify.app/',
   },
   cache: {
     cacheLocation: 'localStorage',
