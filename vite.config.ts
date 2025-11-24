@@ -3,8 +3,11 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/ALCO.Nisku.QC/',   // ← important for GitHub Pages
+  base: '/',                    // ← this is the magic line
+  server: {
+    port: 3000,
+  },
   build: {
-    outDir: 'dist'            // ← make sure this says dist
+    outDir: 'dist'
   }
 })
