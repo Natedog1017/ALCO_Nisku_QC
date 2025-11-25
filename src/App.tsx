@@ -23,7 +23,7 @@ import Dashboard from './components/Dashboard';
 const SP_SITE_URL = 'https://alcoincca.sharepoint.com/sites/ALCOQuality';
 
 // YOUR REAL AZURE AD IDs
-const CLIENT_ID = '03225382-1856-44e6-b492-d2350bab609c';
+const CLIENT_ID = '35e7feef-280f-46ac-84b6-88cdb9898ce7';
 const TENANT_ID = 'cb27d626-9691-4932-8a43-c75911cfad16';
 
 // EXACT REDIRECT URI — NO TRAILING SLASH (this is the magic one)
